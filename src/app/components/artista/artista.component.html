@@ -1,0 +1,88 @@
+<app-loading *ngIf="loading" class="animated fadeIn"></app-loading>
+
+<!-- <div class="container-fluid px-4 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="card border-0">
+            <div class="row set-p justify-content-center">
+                <div class="col-sm-4 px-0"> <img class="image puntero" [src]="artista.images | noimage"> </div>
+                <div class="col-sm-8">
+                    <div class="row px-3 mt-4 mb-3">
+                        <h2 class="text-success mb-1 font-weight-bold">{{ artista.name }}</h2>
+
+                    </div>
+                    <h5 class="text-secondary mb-1">Generos: </h5>
+                    <div *ngFor="let genero of artista.genres">
+                        <p class="text-secondary mb-0">- {{genero}}</p>
+                    </div>
+
+                    <br>
+
+                    <div class="line"></div>
+
+                    <div class="row px-3 mt-3">
+
+                        <h5 class="text-secondary mb-1">Popularidad </h5>
+                    </div>
+                    <div class="row px-3">
+                        <h2 class="text-success mb-1 font-weight-bold">{{artista.popularity}}/100
+                        </h2>
+                    </div>
+                    <div class="row px-3 mb-3">
+                        <p class="text-muted mb-0">Seguidores: {{artista.followers.total | thousandSuff}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div *ngIf="!loading" class="row animated fadeIn">
+    <div class="col-2">
+        <img [src]="artista.images | noimage" class="img-circle">
+    </div>
+
+    <div class="col">
+        <h3>{{ artista.name }}</h3>
+        <p>
+            <a [href]="artista.external_urls.spotify" target="_blank">
+                Ir a la pagina del artista
+            </a>
+        </p>
+        <p>
+            <button routerLink="/search" class="btn btn-outline-danger">
+                << Regresar
+            </button>
+        </p>
+    </div>
+
+    <div class="col-4 text-right">
+
+    </div>
+    <div class="col-12 text-left m-5">
+        <table class="table table-sm table-hover table-dark">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Foto</th>
+                    <th scope="col">Album</th>
+                    <th scope="col">Cancion</th>
+                    <th scope="col">Vista previa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of topTracks; let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td><span><img src = "{{item.album.images | noimage}}" style="height: 60px;"></span></td>
+                    <td>{{item.album.name}}</td>
+                    <td>{{item.name}}</td>
+                    <td>
+                        <!-- <audio controls>
+                            <source [src]="item.preview_url">
+                          </audio> -->
+                        <iframe [src]="item.uri | domseguro: 'https://open.spotify.com/embed?uri='" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
